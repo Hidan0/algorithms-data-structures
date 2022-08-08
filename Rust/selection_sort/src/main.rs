@@ -9,12 +9,12 @@ fn selection_sort(a: &mut [i32]) {
     for k in 0..=a.len() - 2 {
         let mut m = k;
         for j in k + 1..=a.len() - 1 {
-            if (*a)[j] < (*a)[m] {
+            if a[j] < a[m] {
                 m = j;
             }
         }
-        let tmp = (*a)[k];
-        (*a)[k] = (*a)[m];
-        (*a)[m] = tmp;
+        let tmp = a[k];
+        a[k] = a[m];
+        a[m] = tmp;
     }
 }
