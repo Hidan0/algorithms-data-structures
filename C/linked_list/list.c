@@ -21,6 +21,17 @@ int main() {
   print_list(list);
   list = remove_value(list, 15);
   print_list(list);
+
+  printf("New list: \n");
+  Node o_list = insert_ordered(NULL, 9);
+  o_list = insert_ordered(o_list, 3);
+  print_list(o_list);
+  o_list = insert_ordered(o_list, 1);
+  o_list = insert_ordered(o_list, 20);
+  o_list = insert_ordered(o_list, 7);
+  o_list = insert_ordered(o_list, 9);
+  print_list(o_list);
+
   return 1;
 }
 
@@ -82,12 +93,31 @@ Node remove_value(Node head, int value) {
     return head;
 
   if (prev == NULL) {
-    Node p = curr->next;
-    free(curr);
-    return p;
+    head = curr->next;
+  } else {
+    prev->next = curr->next;
   }
 
-  prev->next = curr->next;
   free(curr);
+  return head;
+}
+
+Node insert_ordered(Node head, int value) {
+  Node prev, curr;
+  for (prev = NULL, curr = head; curr != NULL && curr->value <= value;
+       prev = curr, curr = curr->next)
+    ;
+
+  Node new = malloc(sizeof(Node));
+  ASSERT_PTR(new);
+  new->value = value;
+
+  if (prev == NULL) {
+    new->next = head;
+    return new;
+  }
+
+  prev->next = new;
+  new->next = curr;
   return head;
 }
