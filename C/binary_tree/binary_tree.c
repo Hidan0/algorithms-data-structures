@@ -9,7 +9,7 @@
   }
 
 Bit_node bit_new(Item k) {
-  Bit_node t = malloc(sizeof(Bit_node));
+  Bit_node t = malloc(sizeof(struct bit_node));
   ASSERT_PTR(t);
   t->item = k;
   return t;
